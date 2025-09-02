@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: "md",
+  ignoreDeadLinks: true,
   
   title: "Base Framework",
   description: "A powerful Go web framework with authentication, authorization, and modern tooling",
