@@ -1,14 +1,4 @@
 {
   "schemaVersion": 2,
-  "templateId": "node",
-  "dockerfileLines": [
-    "FROM node:lts-alpine",
-    "WORKDIR /app",
-    "COPY package*.json ./",
-    "RUN npm install",
-    "COPY . .",
-    "RUN npm run docs:build",
-    "EXPOSE 5173",
-    "CMD [\"npm\", \"run\", \"docs:preview\"]"
-  ]
+  "dockerfilePath": "./Dockerfile"
 }

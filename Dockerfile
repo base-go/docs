@@ -1,13 +1,23 @@
-# Stage 1: Build the VitePress application
-FROM node:lts-alpine as build-stage
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run docs:build # Or whatever your build command is
+# Build and serve VitePress with bun
+FROM oven/bun:1.2-alpine
 
-# Stage 2: Serve the built application with Nginx
-FROM nginx:alpine
-COPY --from=build-stage /app/.vitepress/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY bun.lockb* ./
+
+# Install dependencies
+RUN bun install
+
+# Copy source code
+COPY . .
+
+# Build the documentation
+RUN bun run docs:build
+
+# Expose port
+EXPOSE 4173
+
+# Start the preview server
+CMD ["bun", "run", "docs:preview", "--host", "0.0.0.0", "--port", "4173"]
