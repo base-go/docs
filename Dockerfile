@@ -15,17 +15,10 @@ COPY . .
 # Build the documentation
 RUN bun run docs:build
 
-# Final stage - keep bun runtime for preview server
-FROM oven/bun:1.2-alpine
-WORKDIR /app
+# Final stage - serve with nginx
+FROM nginx:alpine
 
-# Copy built files and necessary package files
-COPY --from=build-stage /app/.vitepress/dist ./dist
-COPY --from=build-stage /app/package*.json ./
-COPY --from=build-stage /app/.vitepress ./.vitepress
+# Copy built files to nginx html directory
+COPY --from=build-stage /app/.vitepress/dist /usr/share/nginx/html
 
-# Install only production dependencies (if preview command needs them)
-RUN bun install --production
-
-EXPOSE 4173
-CMD ["bun", "run", "docs:preview", "--host", "0.0.0.0", "--port", "4173"]
+EXPOSE 80
