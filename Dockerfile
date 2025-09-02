@@ -15,17 +15,7 @@ COPY . .
 # Build the documentation
 RUN bun run docs:build
 
-# Production stage with nginx
-FROM nginx:alpine
-
-# Copy built files to nginx
-COPY --from=build-stage /app/.vitepress/dist /usr/share/nginx/html
-
-# Copy custom nginx config if needed
-# COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 80
-EXPOSE 80
-
-# Start nginx in foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Final stage - just copy built files
+FROM alpine:latest
+WORKDIR /app
+COPY --from=build-stage /app/.vitepress/dist ./dist
