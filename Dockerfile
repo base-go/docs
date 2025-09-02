@@ -1,5 +1,5 @@
-# Build and serve VitePress with bun
-FROM oven/bun:1.2-alpine
+# Multi-stage build for VitePress documentation
+FROM oven/bun:1.2-alpine as build-stage
 
 WORKDIR /app
 
@@ -15,8 +15,17 @@ COPY . .
 # Build the documentation
 RUN bun run docs:build
 
-# Expose port
-EXPOSE 4173
+# Production stage with nginx
+FROM nginx:alpine
 
-# Start the preview server
-CMD ["bun", "run", "docs:preview", "--host", "0.0.0.0", "--port", "4173"]
+# Copy built files to nginx
+COPY --from=build-stage /app/.vitepress/dist /usr/share/nginx/html
+
+# Copy custom nginx config if needed
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
