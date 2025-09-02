@@ -19,3 +19,5 @@ RUN bun run docs:build
 FROM alpine:latest
 WORKDIR /app
 COPY --from=build-stage /app/.vitepress/dist ./dist
+EXPOSE 4173
+CMD ["bun", "run", "docs:preview", "--host", "0.0.0.0", "--port", "4173"]
