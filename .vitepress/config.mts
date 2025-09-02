@@ -29,7 +29,7 @@ export default defineConfig({
       { text: 'Docs', link: '/docs/' },
       { text: 'Tutorial', link: '/docs/tutorial' },
       { 
-        text: 'v1.0', 
+        text: 'v2.1.x', 
         items: [
           { text: 'Changelog', link: 'https://github.com/base-go/base-core/releases' },
           { text: 'Contributing', link: 'https://github.com/base-go/base-core/blob/main/CONTRIBUTING.md' }
