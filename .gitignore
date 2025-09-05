@@ -33,3 +33,4 @@ docs-deploy.tar.gz
 # Logs
 logs/
 *.log
+bun.lock
