@@ -41,6 +41,36 @@ export default defineConfig({
     }
   },
 
+  // Build hooks - copy markdown files to output
+  async buildEnd(siteConfig) {
+    // Copy source markdown files to build output for /docs/*.md access
+    console.log('📄 Copying markdown files...')
+    const { copyFileSync, readdirSync, statSync, mkdirSync, existsSync } = await import('fs')
+    const { join } = await import('path')
+    
+    const copyMarkdownFiles = (srcDir, destDir) => {
+      if (!existsSync(destDir)) {
+        mkdirSync(destDir, { recursive: true })
+      }
+      
+      const files = readdirSync(srcDir)
+      for (const file of files) {
+        const srcPath = join(srcDir, file)
+        const destPath = join(destDir, file)
+        
+        if (statSync(srcPath).isDirectory()) {
+          copyMarkdownFiles(srcPath, destPath)
+        } else if (file.endsWith('.md')) {
+          copyFileSync(srcPath, destPath)
+          console.log(`  Copied: ${file}`)
+        }
+      }
+    }
+    
+    // Copy markdown files from source to build output
+    copyMarkdownFiles('./md/docs', './.vitepress/dist/docs')
+    console.log('✅ Markdown files copied successfully!')
+  },
 
   head: [
     // Global head tags
