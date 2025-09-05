@@ -12,13 +12,6 @@ export default defineConfig({
   ignoreDeadLinks: true,
   cleanUrls: true, // Enable clean URLs
   
-  // Vite optimization
-  vite: {
-    build: {
-      minify: 'terser'
-    }
-  },
-  
   title: "Base Framework",
   description: "A powerful Go web framework with authentication, authorization, and modern tooling",
   
@@ -48,39 +41,6 @@ export default defineConfig({
     }
   },
 
-  // Support both clean URLs and .md URLs
-  rewrites: {
-    'docs/:page.md': 'docs/:page',
-  },
-
-  // Build hooks for OG image generation
-  buildEnd() {
-    // Generate OG images during build
-    console.log('🎨 Generating OG images...')
-    // Note: In production, you'd run the OG generator here
-  },
-  
-  // Enhanced SEO with per-page metadata
-  transformPageData(pageData) {
-    const canonicalUrl = `https://base.al/${pageData.relativePath}`
-      .replace(/index\.md$/, '')
-      .replace(/\.md$/, '')
-
-    const ogImage = generateOGImage(pageData.title)
-    
-    pageData.frontmatter.head ??= []
-    pageData.frontmatter.head.push(
-      ['link', { rel: 'canonical', href: canonicalUrl }],
-      ['meta', { property: 'og:url', content: canonicalUrl }],
-      ['meta', { property: 'og:title', content: pageData.title }],
-      ['meta', { property: 'og:description', content: pageData.description }],
-      ['meta', { property: 'og:image', content: ogImage }],
-      ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-      ['meta', { name: 'twitter:image', content: ogImage }],
-      ['meta', { name: 'twitter:title', content: pageData.title }],
-      ['meta', { name: 'twitter:description', content: pageData.description }]
-    )
-  },
 
   head: [
     // Global head tags
@@ -91,7 +51,6 @@ export default defineConfig({
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { href: 'https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap', rel: 'stylesheet' }],
-    ['link', { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap', as: 'style', onload: "this.onload=null;this.rel='stylesheet'" }],
     // Schema.org structured data
     ['script', { type: 'application/ld+json' }, JSON.stringify({
       '@context': 'https://schema.org',
