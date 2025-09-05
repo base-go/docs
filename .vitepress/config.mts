@@ -15,15 +15,7 @@ export default defineConfig({
   // Vite optimization
   vite: {
     build: {
-      minify: 'terser',
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vue: ['vue'],
-            vitepress: ['vitepress']
-          }
-        }
-      }
+      minify: 'terser'
     }
   },
   
