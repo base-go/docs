@@ -24,11 +24,8 @@ RUN apk add --no-cache tzdata
 # Copy built files to nginx html directory
 COPY --from=build-stage /app/.vitepress/dist /usr/share/nginx/html
 
-# Copy custom nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Remove default nginx config
-RUN rm /etc/nginx/conf.d/default.conf.bak 2>/dev/null || true
+# Note: nginx.conf is used as Caprover EJS template, not copied here
+# Caprover will process the template and generate the actual nginx config
 
 # Set timezone (optional)
 ENV TZ=UTC
