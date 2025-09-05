@@ -5,7 +5,9 @@
   },
   "scripts": {
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
-  }
+    "docs:build": "vitepress build && node generate-og.js",
+    "docs:preview": "vitepress preview",
+    "generate:og": "node generate-og.js"
+  },
+  "type": "module"
 }

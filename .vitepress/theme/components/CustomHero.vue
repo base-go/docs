@@ -108,11 +108,10 @@ const copyCommand = async () => {
 
 .install-description {
   margin-top: 1rem;
-  color: #000;
+  color: var(--vp-c-text-1);
   font-size: 14px;
   text-align: center;
   font-style: italic;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 640px) {
@@ -131,6 +130,6 @@ const copyCommand = async () => {
   }
 }
 .text-blue-500 {
-  color: #bA5EA1;
+  color: #22c55e;
 }
 </style>

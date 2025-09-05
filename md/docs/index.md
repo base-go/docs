@@ -8,23 +8,24 @@ Base is a full-featured Go web framework that provides everything you need to bu
 
 ## Quick Navigation
 
-### 🚀 Getting Started
+### Getting Started
 - **[Installation](/docs/installation)** - Get Base up and running in minutes
 - **[Quick Start](/docs/quick-start)** - Build your first Base application
 - **[Tutorial](/docs/tutorial)** - Step-by-step guide to Base features
 
-### 🏗️ Architecture
+### Architecture
 - **[Project Structure](/docs/structure)** - Understanding Base project layout
 - **[Framework Anatomy](/docs/anatomy)** - Core concepts and architecture
 - **[Application Core](/docs/application)** - Application directory structure
 
-### ⚙️ Core Features
+### Core Features
 - **[Router](/docs/router)** - HTTP routing and middleware
-- **[Authentication](/docs/auth)** - User authentication and authorization
+- **[Authentication](/docs/authentication)** - User authentication and JWT tokens
+- **[Authorization](/docs/authorization)** - Role-based access control and permissions
 - **[Middleware](/docs/middleware)** - Request/response processing
 - **[Validation](/docs/validator)** - Input validation and sanitization
 
-### 🛠️ Services
+### Services
 - **[Storage](/docs/storage)** - File storage and management
 - **[Email](/docs/email)** - Email sending and templates
 - **[Logger](/docs/logger)** - Structured logging
@@ -33,7 +34,7 @@ Base is a full-featured Go web framework that provides everything you need to bu
 - **[Event Emitter](/docs/emitter)** - Event-driven architecture
 - **[Translation](/docs/translation)** - Internationalization support
 
-### 📚 Reference
+### Reference
 - **[CLI Commands](/docs/cli)** - Command-line interface reference
 - **[REST API](/docs/api)** - API development guide
 - **[Base Helpers](/docs/base-helpers)** - Utility functions and helpers
@@ -42,12 +43,12 @@ Base is a full-featured Go web framework that provides everything you need to bu
 
 Base Framework is built with developer experience and production readiness in mind:
 
-- **🔐 Authentication Built-in** - JWT, sessions, and role-based access control
-- **📊 Database Ready** - GORM integration with migrations and seeders
-- **🚀 Performance First** - Optimized for speed and scalability
-- **🛡️ Security Focused** - CSRF protection, input validation, and secure defaults
-- **📱 Modern Tooling** - Hot reload, CLI generators, and development tools
-- **🌐 Production Ready** - Docker support, logging, monitoring, and deployment tools
+- **Authentication Built-in** - JWT, sessions, and role-based access control
+- **Database Ready** - GORM integration with migrations and seeders
+- **Performance First** - Optimized for speed and scalability
+- **Security Focused** - CSRF protection, input validation, and secure defaults
+- **Modern Tooling** - Hot reload, CLI generators, and development tools
+- **Production Ready** - Docker support, logging, monitoring, and deployment tools
 
 ## Community & Support
 

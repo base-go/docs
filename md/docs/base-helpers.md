@@ -4,26 +4,38 @@ description: Base Helpers documentation for Base Framework.
 ---
 
 # Base Helpers
+
 Base Framework provides a comprehensive set of helper functions and utilities to streamline development and reduce boilerplate code.
+
 ## Overview
+
 Base Framework includes several helper packages designed to handle common development tasks like JWT management, context operations, slug generation, dynamic model retrieval, standardized responses, error handling, and custom data types. These helpers promote code consistency and reduce repetitive implementation across your modules.
+
 ## Helper Categories
+
 ### Core Helpers
-- • `helper/` - General utilities
-- • `base/` - Base classes for modules
-- • `types/` - Custom types and response formats
+
+- `helper/` - General utilities
+- `base/` - Base classes for modules
+- `types/` - Custom types and response formats
+
 ### Authentication
-- • JWT token generation
-- • Token validation
-- • Context-based user retrieval
+
+- JWT token generation
+- Token validation
+- Context-based user retrieval
+
 ### HTTP Responses
-- • Standardized success responses
-- • Error handling utilities
-- • Pagination helpers
+
+- Standardized success responses
+- Error handling utilities
+- Pagination helpers
+
 ### Dynamic Operations
-- • Dynamic model retrieval
-- • Slug generation and validation
-- • Context type conversion
+
+- Dynamic model retrieval
+- Slug generation and validation
+- Context type conversion
 ## Core Helper Functions
 ### JWT Authentication Helpers
 Helper functions for JWT token generation and validation:
@@ -50,6 +62,7 @@ return fmt.Errorf("token validation failed: %w", err)
 }
 ```
 ### Context Utilities
+
 Type-safe context value retrieval with automatic conversion:
 ```go
 // Get string values from context
@@ -66,6 +79,7 @@ isActive := helper.GetContextBool(ctx, "active")
 // So "user_id" becomes "base_user_id" internally
 ```
 ### Dynamic Model Operations
+
 Dynamically retrieve objects based on field names and values:
 ```go
 // First, register your models for dynamic retrieval
@@ -97,6 +111,7 @@ return fmt.Errorf("failed to get category: %w", err)
 // 4. Queries the database for id = 5
 ```
 ### Slug Generation
+
 Generate URL-friendly slugs with uniqueness guarantees:
 ```go
 slugHelper := helper.NewSlugHelper()
@@ -119,8 +134,11 @@ return err
 // Result: "my-blog-post" or "my-blog-post-2" if conflict exists
 ```
 ## Base Classes
+
 Base Framework provides base classes that you can embed in your modules to get common functionality automatically.
+
 ### Base Module
+
 Provides common module functionality with dependency injection:
 ```go
 import "base/core/base"
@@ -155,6 +173,7 @@ return nil
 }
 ```
 ### Base Service
+
 Common service operations like logging, pagination, and database transactions:
 ```go
 type MyService struct {
@@ -198,6 +217,7 @@ return s.CreatePaginatedResponse(posts, total, page, limit), nil
 }
 ```
 ### Base Controller
+
 Standardized HTTP response methods and parameter extraction:
 ```go
 type MyController struct {
@@ -253,7 +273,9 @@ return nil
 }
 ```
 ## Custom Types
+
 ### DateTime Type
+
 Enhanced datetime handling with flexible parsing and database compatibility:
 ```go
 import "base/core/types"
@@ -281,6 +303,7 @@ isEqual := dt.Equal(other)               // Equality
 }
 ```
 ### Standardized Response Types
+
 Consistent response structures for success, error, and paginated responses:
 ```go
 // Success Response
@@ -327,7 +350,9 @@ TotalPages: 10,
 }
 ```
 ## Error Handling Types
+
 ### Validation Error Types
+
 Structured validation error handling with field-specific error messages:
 ```go
 import "base/core/types"
@@ -359,6 +384,7 @@ return nil
 }
 ```
 ### Predefined Common Errors
+
 Ready-to-use error constants for common scenarios:
 ```go
 import "base/core/types"
@@ -399,6 +425,7 @@ return nil
 }
 ```
 ### Standard User Data Type
+
 Standardized user data structure for consistent user representation:
 ```go
 import "base/core/types"
@@ -440,27 +467,32 @@ return c.RespondSuccess(ctx, userData)
 }
 ```
 ## Best Practices
-### ✅ Do
-- • Use base classes to inherit common functionality
-- • Register models for dynamic retrieval early in initialization
-- • Use standardized response types for consistency
-- • Leverage transaction helpers for data integrity
-- • Use context helpers for type-safe value extraction
-- • Generate unique slugs to avoid conflicts
-- • Use the DateTime type for flexible time handling
-- • Use predefined error constants for common scenarios
-- • Structure validation errors with field-specific messages
-### ❌ Don't
-- • Reimplement functionality already provided by helpers
-- • Forget to register models before using dynamic retrieval
-- • Skip error handling in helper functions
-- • Use raw time.Time when DateTime provides better features
-- • Hardcode response structures instead of using types
-- • Ignore transaction boundaries for related operations
-- • Access context values without type checking
-- • Create custom error types for common error scenarios
-- • Return generic errors without field-specific validation messages
+
+### Do
+
+- Use base classes to inherit common functionality
+- Register models for dynamic retrieval early in initialization
+- Use standardized response types for consistency
+- Leverage transaction helpers for data integrity
+- Use context helpers for type-safe value extraction
+- Generate unique slugs to avoid conflicts
+- Use the DateTime type for flexible time handling
+- Use predefined error constants for common scenarios
+- Structure validation errors with field-specific messages
+
+### Don't
+
+- Reimplement functionality already provided by helpers
+- Forget to register models before using dynamic retrieval
+- Skip error handling in helper functions
+- Use raw time.Time when DateTime provides better features
+- Hardcode response structures instead of using types
+- Ignore transaction boundaries for related operations
+- Access context values without type checking
+- Create custom error types for common error scenarios
+- Return generic errors without field-specific validation messages
 ## Integration Example
+
 Here's how to use multiple helpers together in a real module:
 ```go
 // Module with integrated helpers

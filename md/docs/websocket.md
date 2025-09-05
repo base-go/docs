@@ -4,49 +4,61 @@ description: Websocket documentation for Base Framework.
 ---
 
 # WebSocket
+
 Real-time communication with WebSocket support. Built-in hub management, room-based messaging, and collaborative features.
+
 ## Overview
+
 ### Multi-Room Support
+
 Organize users into rooms with automatic user list management and room-specific broadcasting.
+
 ### Real-time Messaging
+
 Instant message delivery with system notifications and typing indicators.
+
 ### Collaborative Features
+
 Cursor tracking, collaborative drawing, code editing, and shared whiteboards.
+
 Base Framework includes a production-ready WebSocket implementation with automatic hub initialization, connection management, and message broadcasting. The system supports multiple rooms, user management, and various collaborative features out of the box.
-WebSocket Endpoint
+
+**WebSocket Endpoint**
+
 The WebSocket server runs automatically when you start Base Framework and is available at `/api/ws`
 ## Connecting to WebSocket
+
 ### Basic Connection
+
 ```javascript
 // Connect to WebSocket server
 const socket = new WebSocket('ws://localhost:8100/api/ws?id=user123&nickname=John&room=general');
+
 socket.onopen = function(event) {
-console.log('Connected to WebSocket server');
+    console.log('Connected to WebSocket server');
 };
+
 socket.onmessage = function(event) {
-const message = JSON.parse(event.data);
-console.log('Received message:', message);
+    const message = JSON.parse(event.data);
+    console.log('Received message:', message);
 };
+
 socket.onclose = function(event) {
-console.log('Disconnected from WebSocket server');
+    console.log('Disconnected from WebSocket server');
 };
+
 socket.onerror = function(error) {
-console.error('WebSocket error:', error);
+    console.error('WebSocket error:', error);
 };
 ```
+
 ### Connection Parameters
-Parameter
-Required
-Description
-id
-Optional
-Unique client identifier
-nickname
-Optional
-Display name for the user
-room
-Optional
-Room to join (default: general)
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| id | Optional | Unique client identifier |
+| nickname | Optional | Display name for the user |
+| room | Optional | Room to join (default: general) |
 ## Message Types
 ### Chat Messages
 ```javascript

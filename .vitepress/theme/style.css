@@ -141,6 +141,10 @@
   font-size: 2.5rem;
   margin-bottom: 1rem;
   display: block;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
 }
 
 .vp-feature h3 {

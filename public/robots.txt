@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://base.al/sitemap.xml
+
+# Optimize crawling
+Crawl-delay: 1
+
+# Block access to sensitive areas
+Disallow: /og/
+Disallow: /.vitepress/
+Disallow: /node_modules/

@@ -4,30 +4,43 @@ description: Cli documentation for Base Framework.
 ---
 
 # CLI Reference
+
 Complete reference for Base Framework CLI commands, generators, and field types.
+
 ## Overview
+
 The Base CLI provides a comprehensive set of commands for creating projects, generating modules, managing development servers, and maintaining your applications. Built with Cobra for powerful command-line interactions.
+
 ## Quick Reference
+
 ### Project Commands
-- • `base new` - Create new project
-- • `base start` - Start development server
-- • `base docs` - Generate documentation
+
+- `base new` - Create new project
+- `base start` - Start development server
+- `base docs` - Generate documentation
+
 ### Module Commands
-- • `base g` - Generate module
-- • `base d` - Destroy module
-- • `base update` - Update framework
+
+- `base g` - Generate module
+- `base d` - Destroy module
+- `base update` - Update framework
 ## base new
+
 Creates a new Base Framework project by downloading the latest framework template and setting up the project structure.
+
 ### Syntax
+
 ```bash
 base new [project_name]
 ```
+
 ### What it does
-- • Downloads the latest Base Framework template from GitHub
-- • Creates a new directory with your project name
-- • Sets up the complete project structure
-- • Initializes Go modules and dependencies
-- • Configures development environment
+
+- Downloads the latest Base Framework template from GitHub
+- Creates a new directory with your project name
+- Sets up the complete project structure
+- Initializes Go modules and dependencies
+- Configures development environment
 ### Example Usage
 ```bash
 # Create a new project called "my-api"
@@ -38,19 +51,24 @@ cd my-api
 base start
 ```
 ## base g (generate)
+
 Generates complete modules with models, controllers, services, validators, and auto-updates your app initialization. The most powerful command in the Base CLI.
+
 ### Syntax
+
 ```bash
 base g [module_name] [field:type...] [options]
 base generate [module_name] [field:type...] [options]
 ```
+
 ### What gets generated
-- • **Model:** `app/models/{name}.go` - GORM model with relationships
-- • **Controller:** `app/{name}/controller.go` - HTTP handlers and routes
-- • **Service:** `app/{name}/service.go` - Business logic layer
-- • **Module:** `app/{name}/module.go` - Module definition and wiring
-- • **Validator:** `app/{name}/validator.go` - Request validation
-- • **Registration:** Updates `app/init.go` automatically
+
+- **Model:** `app/models/{name}.go` - GORM model with relationships
+- **Controller:** `app/{name}/controller.go` - HTTP handlers and routes
+- **Service:** `app/{name}/service.go` - Business logic layer
+- **Module:** `app/{name}/module.go` - Module definition and wiring
+- **Validator:** `app/{name}/validator.go` - Request validation
+- **Registration:** Updates `app/init.go` automatically
 ### Example Usage
 ```bash
 # Simple blog post
@@ -63,137 +81,58 @@ base g profile user_id:uint avatar:image bio:text social_links:json
 base g article title:string content:text author:belongsTo:User category:belongsTo:Category tags:manyToMany:Tag
 ```
 ### Field Types Reference
+
 #### Basic Data Types
-CLI Type
-Go Type
-Database
-Example
-string
-string
-VARCHAR(255)
-name:string
-text
-string
-TEXT
-content:text
-email
-string
-VARCHAR(255)
-email:email
-url
-string
-VARCHAR(255)
-website:url
-slug
-string
-VARCHAR(255)
-slug:slug
+
+| CLI Type | Go Type | Database | Example |
+|----------|---------|----------|---------|
+| string | string | VARCHAR(255) | name:string |
+| text | string | TEXT | content:text |
+| email | string | VARCHAR(255) | email:email |
+| url | string | VARCHAR(255) | website:url |
+| slug | string | VARCHAR(255) | slug:slug |
 #### Numeric Types
-CLI Type
-Go Type
-Use Case
-Example
-int
-int
-Signed integers
-age:int
-uint
-uint
-IDs, positive numbers
-user_id:uint
-float
-float64
-Prices, measurements
-price:float
-decimal
-float64
-Financial calculations
-amount:decimal
-sort
-int
-Sort order
-order:sort
-bool
-bool
-True/false flags
-active:bool
+
+| CLI Type | Go Type | Use Case | Example |
+|----------|---------|----------|---------|
+| int | int | Signed integers | age:int |
+| uint | uint | IDs, positive numbers | user_id:uint |
+| float | float64 | Prices, measurements | price:float |
+| decimal | float64 | Financial calculations | amount:decimal |
+| sort | int | Sort order | order:sort |
+| bool | bool | True/false flags | active:bool |
 #### Date & Time Types
-CLI Type
-Go Type
-Description
-Example
-datetime
-time.Time
-Full date and time
-created_at:datetime
-time
-time.Time
-Timestamp
-started_at:time
-date
-time.Time
-Date only
-birth_date:date
-timestamp
-time.Time
-Unix timestamp
-modified:timestamp
+
+| CLI Type | Go Type | Description | Example |
+|----------|---------|-------------|---------|
+| datetime | time.Time | Full date and time | created_at:datetime |
+| time | time.Time | Timestamp | started_at:time |
+| date | time.Time | Date only | birth_date:date |
+| timestamp | time.Time | Unix timestamp | modified:timestamp |
 #### File & Media Types
-CLI Type
-Go Type
-Validation
-Example
-image
-*storage.Attachment
-5MB, image formats
-avatar:image
-file
-*storage.Attachment
-50MB, documents
-document:file
+
+| CLI Type | Go Type | Validation | Example |
+|----------|---------|------------|---------|
+| image | *storage.Attachment | 5MB, image formats | avatar:image |
+| file | *storage.Attachment | 50MB, documents | document:file |
 #### Special & Data Types
-CLI Type
-Go Type
-Use Case
-Example
-json
-datatypes.JSON
-JSON data
-metadata:json
-jsonb
-datatypes.JSON
-Binary JSON (PostgreSQL)
-settings:jsonb
-translation
-translation.Field
-Multi-language text
-title:translation
-translatedField
-translation.Field
-i18n field
-name:translatedField
+
+| CLI Type | Go Type | Use Case | Example |
+|----------|---------|----------|---------|
+| json | datatypes.JSON | JSON data | metadata:json |
+| jsonb | datatypes.JSON | Binary JSON (PostgreSQL) | settings:jsonb |
+| translation | translation.Field | Multi-language text | title:translation |
+| translatedField | translation.Field | i18n field | name:translatedField |
 #### Relationship Types
+
 Base Framework supports sophisticated relationship definitions using colon syntax:
-Relationship
-Syntax
-Go Type
-Example
-Belongs To
-field:belongsTo:Model
-Model
-author:belongsTo:User
-Has One
-field:hasOne:Model
-*Model
-profile:hasOne:Profile
-Has Many
-field:hasMany:Model
-[]Model
-posts:hasMany:Post
-Many to Many
-field:manyToMany:Model
-[]*Model
-tags:manyToMany:Tag
+
+| Relationship | Syntax | Go Type | Example |
+|--------------|--------|---------|---------|
+| Belongs To | field:belongsTo:Model | Model | author:belongsTo:User |
+| Has One | field:hasOne:Model | *Model | profile:hasOne:Profile |
+| Has Many | field:hasMany:Model | []Model | posts:hasMany:Post |
+| Many to Many | field:manyToMany:Model | []*Model | tags:manyToMany:Tag |
 ### Real-World Examples
 #### Blog System
 ```bash
@@ -307,9 +246,10 @@ Generate static swagger files (default: true)
 --no-static
 Skip generating static files
 ### Generated Files
-- • **swagger.json** - Swagger 2.0 specification in JSON format
-- • **swagger.yaml** - Swagger 2.0 specification in YAML format
-- • **docs.go** - Go package with embedded documentation
+
+- **swagger.json** - Swagger 2.0 specification in JSON format
+- **swagger.yaml** - Swagger 2.0 specification in YAML format
+- **docs.go** - Go package with embedded documentation
 ### Supported Annotations
 ```go
 // @Summary Create a new post
@@ -336,22 +276,29 @@ base docs --no-static
 base docs -o api-docs -s
 ```
 ## base update
+
 Updates the Base Framework core directory to the latest version while preserving your application code and customizations.
+
 ### Syntax
+
 ```bash
 base update
 ```
+
 ### What it does
-- • Downloads the latest Base Framework core matching your CLI version
-- • Creates automatic backup of existing core directory
-- • Replaces core directory with updated version
-- • Preserves your app directory and custom code
-- • Rollback support if update fails
+
+- Downloads the latest Base Framework core matching your CLI version
+- Creates automatic backup of existing core directory
+- Replaces core directory with updated version
+- Preserves your app directory and custom code
+- Rollback support if update fails
+
 ### Safety Features
-- • **Automatic Backup:** Creates `core.bak` before updating
-- • **Validation:** Verifies downloaded files before replacement
-- • **Rollback:** Automatically restores backup if update fails
-- • **Preservation:** Only updates core, leaves app code untouched
+
+- **Automatic Backup:** Creates `core.bak` before updating
+- **Validation:** Verifies downloaded files before replacement
+- **Rollback:** Automatically restores backup if update fails
+- **Preservation:** Only updates core, leaves app code untouched
 ### Example Output
 ```bash
 $ base update
@@ -361,22 +308,25 @@ Core directory updated successfully.
 Base Core updated successfully.
 ```
 ## base upgrade
+
 Upgrades the Base CLI tool itself to the latest version with support for major version upgrades and breaking change warnings.
 ### Syntax
 ```bash
 base upgrade [flags]
 ```
 ### Flags
-Flag
-Description
---major
-Allow upgrade to new major version (may contain breaking changes)
+
+| Flag | Description |
+|------|-------------|
+| --major | Allow upgrade to new major version (may contain breaking changes) |
+
 ### Upgrade Behavior
-- • **Minor/Patch:** Upgrades automatically within same major version
-- • **Major:** Requires `--major` flag and user confirmation
-- • **Validation:** Downloads, verifies, and tests binary before installation
-- • **Cross-platform:** Handles Windows, macOS, and Linux installations
-- • **Permissions:** Uses sudo for system directory installation on Unix
+
+- **Minor/Patch:** Upgrades automatically within same major version
+- **Major:** Requires `--major` flag and user confirmation
+- **Validation:** Downloads, verifies, and tests binary before installation
+- **Cross-platform:** Handles Windows, macOS, and Linux installations
+- **Permissions:** Uses sudo for system directory installation on Unix
 ### Major Version Warnings
 ```bash
 # When only minor/patch updates are available
@@ -391,10 +341,10 @@ You're already using the latest version (2.0.9)
 # When using --major flag for major version upgrade
 $ base upgrade --major
 Checking for updates...
-🚨 MAJOR VERSION UPGRADE DETECTED: 2.0.9 → 3.0.0
+MAJOR VERSION UPGRADE DETECTED: 2.0.9 → 3.0.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  This is a MAJOR version upgrade that may contain breaking changes!
-📚 Full changelog: https://github.com/base-go/cmd/releases/tag/v3.0.0
+This is a MAJOR version upgrade that may contain breaking changes!
+Full changelog: https://github.com/base-go/cmd/releases/tag/v3.0.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Do you want to proceed with the upgrade? [y/N]: y
 Downloading version 3.0.0...
